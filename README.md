@@ -4,7 +4,7 @@ A simple script that creates and trusts a self-signed development certificate fo
 
 ## What does the script do
 
-The script uses openssl to create a self-signed certificate. The certificate will then be imported and trusted at 
+The script uses openssl to create a self-signed certificate. The certificate will then be imported and trusted at:
 
 - System certificates - to enable service-to-service communication
 - User nssdb - to trust the certificate in supported application like Chromium or Microsoft Edge
@@ -15,7 +15,7 @@ In addition the certificate will be imported into dotnet so that it will be used
 
 ## Prerequisites
 
-- dotnet
+- dotnet-sdk
 - libnss3-tools (install via `sudo apt install libnss3-tools`)
 
 ## Usage
