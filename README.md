@@ -23,3 +23,7 @@ In addition the certificate will be imported into dotnet so that it will be used
 Simply run the script.
 
 `./create-dotnet-devcert`
+
+## More info
+
+More information about this can be found on my blog post [https://blog.wille-zone.de/post/aspnetcore-devcert-for-ubuntu](https://blog.wille-zone.de/post/aspnetcore-devcert-for-ubuntu).
