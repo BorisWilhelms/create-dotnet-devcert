@@ -56,9 +56,14 @@ for NSSDB in ${NSSDB_PATHS[@]}; do
     fi
 done
 
-sudo rm /etc/ssl/certs/dotnet-devcert.pem
-sudo cp $CRTFILE "/usr/local/share/ca-certificates"
-sudo update-ca-certificates
+if [ $(id -u) -ne 0 ]; then
+    SUDO='sudo'
+fi
+
+$SUDO rm /etc/ssl/certs/dotnet-devcert.pem
+$SUDO cp $CRTFILE "/usr/local/share/ca-certificates"
+$SUDO update-ca-certificates
 
 dotnet dev-certs https --clean --import $PFXFILE -p ""
 rm -R $TMP_PATH
+
