@@ -15,7 +15,7 @@ In addition the certificate will be imported into dotnet so that it will be used
 
 ## Prerequisites
 
-- dotnet-sdk
+- dotnet-sdk (Version >= 5.0)
 - libnss3-tools (install via `sudo apt install libnss3-tools`)
 
 ## Usage
