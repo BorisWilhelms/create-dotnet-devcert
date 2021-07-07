@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 TMP_PATH=/var/tmp/localhost-dev-cert
 if [ ! -d $TMP_PATH ]; then
     mkdir $TMP_PATH
@@ -8,11 +8,9 @@ KEYFILE=$TMP_PATH/dotnet-devcert.key
 CRTFILE=$TMP_PATH/dotnet-devcert.crt
 PFXFILE=$TMP_PATH/dotnet-devcert.pfx
 
-NSSDB_PATHS=(
-    "$HOME/.pki/nssdb"
-    "$HOME/snap/chromium/current/.pki/nssdb"
-    "$HOME/snap/postman/current/.pki/nssdb"
-)
+NSSDB_PATHS="$HOME/.pki/nssdb \
+    $HOME/snap/chromium/current/.pki/nssdb \
+    $HOME/snap/postman/current/.pki/nssdb"
 
 CONF_PATH=$TMP_PATH/localhost.conf
 cat >> $CONF_PATH <<EOF
@@ -41,22 +39,22 @@ subjectAltName          = critical, @alt_names
 DNS.1                   = localhost
 EOF
 
-function configure_nssdb() {
+configure_nssdb() {
     echo "Configuring nssdb for $1"
-    certutil -d sql:$1 -D -n dotnet-devcert
-    certutil -d sql:$1 -A -t "CP,," -n dotnet-devcert -i $CRTFILE
+    certutil -d sql:"$1" -D -n dotnet-devcert
+    certutil -d sql:"$1" -A -t "CP,," -n dotnet-devcert -i $CRTFILE
 }
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $KEYFILE -out $CRTFILE -config $CONF_PATH --passout pass:
 openssl pkcs12 -export -out $PFXFILE -inkey $KEYFILE -in $CRTFILE --passout pass:
 
-for NSSDB in ${NSSDB_PATHS[@]}; do
+for NSSDB in $NSSDB_PATHS; do
     if [ -d "$NSSDB" ]; then
-        configure_nssdb $NSSDB
+        configure_nssdb "$NSSDB"
     fi
 done
 
-if [ $(id -u) -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     SUDO='sudo'
 fi
 
