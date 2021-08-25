@@ -1,6 +1,6 @@
 # create-dotnet-devcert
 
-A simple script that creates and trusts a self-signed development certificate for dotnet on Ubuntu.
+A simple script that creates and trusts a self-signed development certificate for dotnet on Ubuntu and Arch based distributions.
 
 ## What does the script do
 
@@ -16,13 +16,17 @@ In addition the certificate will be imported into dotnet so that it will be used
 ## Prerequisites
 
 - dotnet-sdk (Version >= 5.0)
-- libnss3-tools (install via `sudo apt install libnss3-tools`)
+- libnss3-tools (install via `sudo apt install libnss3-tools` or `sudo pacman -S nss`)
 
 ## Usage
 
-Simply run the script.
+Simply run the script needed for your distribution.
 
-`./create-dotnet-devcert`
+Ubuntu based distributions:
+`./scripts/ubuntu-create-dotnet-devcert`
+
+Arch based distributions:
+`./scripts/arch-create-dotnet-devcert`
 
 ## More info
 
