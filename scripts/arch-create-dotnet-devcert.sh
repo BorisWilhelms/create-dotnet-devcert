@@ -7,5 +7,6 @@ if [ -f "$OLD_CRT" ]; then
 fi
 
 $SUDO trust anchor --store $CRTFILE
+$SUDO trust extract-compat
 
 cleanup
