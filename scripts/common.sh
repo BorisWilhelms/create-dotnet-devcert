@@ -1,4 +1,29 @@
 #!/bin/sh
+SAVE=0
+
+usage() {
+    echo "Usage: $0 [-s]"
+    echo "Generates a valid ASP.NET Core self-signed certificate for the local machine."
+    echo "The certificate will be imported into the system's certificate store and into various other places."
+    echo "  -s: Also saves the generated crtfile to the home directory"
+    exit 1
+}
+
+while getopts "sh" opt
+do
+    case "$opt" in
+        s)
+            SAVE=1
+            ;;
+        h)
+            usage
+            exit 1
+            ;;
+        *)
+            ;;
+    esac
+done
+
 TMP_PATH=/var/tmp/localhost-dev-cert
 if [ ! -d $TMP_PATH ]; then
     mkdir $TMP_PATH
@@ -64,3 +89,8 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 dotnet dev-certs https --clean --import $PFXFILE -p ""
+
+if [ "$SAVE" = 1 ]; then
+   cp $CRTFILE $HOME
+   echo "Saved certificate to $HOME/$(basename $CRTFILE)"
+fi

@@ -17,9 +17,9 @@ In addition the certificate will be imported into dotnet so that it will be used
 
 - dotnet-sdk (Version >= 5.0)
 - libnss3-tools
-    - ubuntu: `sudo apt install libnss3-tools` 
-    - arch: `sudo pacman -S nss`
-    - fedora: `sudo dnf install openssl nss-tools`
+  - ubuntu: `sudo apt install libnss3-tools`
+  - arch: `sudo pacman -S nss`
+  - fedora: `sudo dnf install openssl nss-tools`
 
 ## Usage
 
@@ -33,6 +33,8 @@ Arch based distributions:
 
 Fedora based distributions:
 `./scripts/fedora-create-dotnet-devcert`
+
+Use the `-s` to also save the certificate into the home folder so it can be manually imported into other programs.
 
 ## More info
 
