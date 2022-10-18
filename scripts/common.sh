@@ -95,5 +95,4 @@ if [ "$SAVE" = 1 ]; then
    echo "Saved certificate to $HOME/$(basename $CRTFILE)"
    cp $PFXFILE $HOME
    echo "Saved certificate to $HOME/$(basename $PFXFILE)"
-
 fi
