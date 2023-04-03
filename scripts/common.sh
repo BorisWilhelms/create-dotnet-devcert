@@ -54,7 +54,8 @@ PFXFILE=$TMP_PATH/dotnet-devcert.pfx
 
 NSSDB_PATHS="$HOME/.pki/nssdb \
     $HOME/snap/chromium/current/.pki/nssdb \
-    $HOME/snap/postman/current/.pki/nssdb"
+    $HOME/snap/postman/current/.pki/nssdb \
+    $HOME/snap/brave/current/.pki/nssdb"
 
 CONF_PATH=$TMP_PATH/localhost.conf
 cat >> $CONF_PATH <<EOF
