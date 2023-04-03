@@ -9,6 +9,21 @@ usage() {
     exit 1
 }
 
+check_command() {
+    echo "Checking if $1 exists"
+    if ! command -v "$1" > /dev/null 2>&1
+    then
+        echo "$1 does not exist. Please check prerequisites"
+        exit
+    fi
+}
+
+DEPENDENCIES="dotnet certutil openssl"
+
+for DEP in $DEPENDENCIES; do
+    check_command "$DEP"
+done
+
 while getopts "sh" opt
 do
     case "$opt" in
@@ -91,8 +106,8 @@ fi
 dotnet dev-certs https --clean --import $PFXFILE -p ""
 
 if [ "$SAVE" = 1 ]; then
-   cp $CRTFILE $HOME
-   echo "Saved certificate to $HOME/$(basename $CRTFILE)"
-   cp $PFXFILE $HOME
-   echo "Saved certificate to $HOME/$(basename $PFXFILE)"
+    cp $CRTFILE $HOME
+    echo "Saved certificate to $HOME/$(basename $CRTFILE)"
+    cp $PFXFILE $HOME
+    echo "Saved certificate to $HOME/$(basename $PFXFILE)"
 fi
