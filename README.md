@@ -10,6 +10,7 @@ The script uses openssl to create a self-signed certificate. The certificate wil
 - User nssdb - to trust the certificate in supported application like Chromium or Microsoft Edge
 - Snap Chromium nssdb - to trust the certificate in Chromium if installed via snap
 - Snap Postman nssdb - to trust the certificate in Postman if installed via snap
+- Snap Brave nssdb - to trust the certificate in Brave if installed via snap
 
 In addition the certificate will be imported into dotnet so that it will be used as a development certificate in ASP.NET Core.
 
@@ -19,7 +20,8 @@ In addition the certificate will be imported into dotnet so that it will be used
 - libnss3-tools
   - ubuntu: `sudo apt install libnss3-tools`
   - arch: `sudo pacman -S nss`
-  - fedora: `sudo dnf install openssl nss-tools`
+  - fedora: `sudo dnf install nss-tools`
+- openssl
 
 ## Usage
 
