@@ -1,5 +1,28 @@
 #!/bin/sh
 SAVE=0
+DEBUG=0
+
+while getopts "shd" opt
+do
+    case "$opt" in
+        s)
+            SAVE=1
+            ;;
+        d)
+            DEBUG=1
+            ;;
+        h)
+            usage
+            exit 1
+            ;;
+        *)
+            ;;
+    esac
+done
+
+if [ $DEBUG -eq 1 ]; then
+    set -ex
+fi
 
 usage() {
     echo "Usage: $0 [-s]"
@@ -22,21 +45,6 @@ DEPENDENCIES="dotnet certutil openssl"
 
 for DEP in $DEPENDENCIES; do
     check_command "$DEP"
-done
-
-while getopts "sh" opt
-do
-    case "$opt" in
-        s)
-            SAVE=1
-            ;;
-        h)
-            usage
-            exit 1
-            ;;
-        *)
-            ;;
-    esac
 done
 
 TMP_PATH=/var/tmp/localhost-dev-cert
